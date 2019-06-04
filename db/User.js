@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("./db");
+const hash = require("../utils/hashedpassword");
 
 const User = db.define("user", {
   id: {
@@ -14,13 +15,17 @@ const User = db.define("user", {
   password: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: { min: 6 }
+    validate: { len: [6, 30] }
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: { isEmail: true }
   }
+});
+
+User.beforeCreate((user, options) => {
+  user.password = hash(user.password);
 });
 
 module.exports = User;
