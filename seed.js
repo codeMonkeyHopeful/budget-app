@@ -13,10 +13,15 @@ db.sync({ force: true })
     console.log("Connected to DB");
   })
   .then(() => {
+    console.log("TEST");
     return Promise.all([
       createUser("Mark", "LikeABoss", "HypeDis@gmail.com"),
-      createPurchase("Monkey", 50.019)
+      createPurchase("Monkey", 50.019),
+      createPurchase("Cool Hat", 10.0)
     ]);
+  })
+  .then(([user, purchase, purchase2]) => {
+    return Promise.all([purchase.setUser(user), purchase2.setUser(user)]);
   })
   .catch(e => {
     console.log(e);
