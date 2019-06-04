@@ -12,15 +12,18 @@
     - hash password
     - validate email
 
+    - create instance method to validate login credentials
+
   - Bank: {uuid, name, balance}
 
-* Purchase: {uuid, name, cost}
-  - belongs to user
-  - removes money from bank account balance when a purchase is made
+  - Purchase: {uuid, name, cost}
+    - belongs to user
+    - removes money from bank account balance when a purchase is made
 
 ### server
 
 - Routes:
+
   - login
     - validate user name and password before allowing access to budget
   - purchases
